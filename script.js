@@ -1,18 +1,18 @@
-function appendToResult(value) {
-  document.getElementById('result').value += value;
-}
+const display = document.getElementById("display");
+const buttons = document.querySelectorAll("button");
 
-function clearResult() {
-  document.getElementById('result').value = '';
-}
-
-function calculateResult() {
-  const expression = document.getElementById('result').value;
-  try {
-    const result = eval(expression);
-    document.getElementById('result').value = result;
-  } catch (error) {
-    document.getElementById('result').value = 'Error';
-  }
-}
-
+buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+        if (e.target.textContent === "C") {
+            display.value = "";
+        } else if (e.target.textContent === "=") {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = "Error";
+            }
+        } else {
+            display.value += e.target.textContent;
+        }
+    });
+});
